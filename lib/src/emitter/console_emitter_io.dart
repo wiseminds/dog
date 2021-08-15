@@ -16,20 +16,20 @@ class ConsoleEmitter extends Emitter {
 
   final AnsiPen pen = AnsiPen();
 
-  ConsoleEmitter({bool supportsAnsiColor}) {
+  ConsoleEmitter({bool? supportsAnsiColor}) {
     if (supportsAnsiColor != null) {
       ansiColorDisabled = !supportsAnsiColor;
     }
   }
 
   @override
-  void emit(Record record, List<String> lines) {
+  void emit(Record record, List<String?> lines) {
     pen.reset();
     if (levelColors[record.level] != null) {
       pen.xterm(levelColors[record.level]);
     }
-    for (String line in lines) {
-      print(pen(line));
+    for (String? line in lines) {
+      print(pen(line!));
     }
   }
 }

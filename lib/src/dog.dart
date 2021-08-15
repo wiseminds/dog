@@ -18,8 +18,8 @@ class Dog {
   static Level level = Level.ALL;
 
   Dog({
-    Formatter formatter,
-    Emitter emitter,
+    Formatter? formatter,
+    Emitter? emitter,
   })  : this.formatter = formatter ?? PrettyFormatter(),
         this.emitter = emitter ?? ConsoleEmitter();
 
@@ -31,41 +31,41 @@ class Dog {
   //         {String tag, String title, StackTrace stackTrace}) =>
   //     d(message, tag: tag, stackTrace: stackTrace);
 
-  void v(dynamic message, {String tag, String title, StackTrace stackTrace}) {
+  void v(dynamic message, {String? tag, String? title, StackTrace? stackTrace}) {
     _log(Level.VERBOSE, message,
         tag: tag, title: title, stackTrace: stackTrace);
   }
 
-  void d(dynamic message, {String tag, String title, StackTrace stackTrace}) {
+  void d(dynamic message, {String? tag, String? title, StackTrace? stackTrace}) {
     _log(Level.DEBUG, message, tag: tag, title: title, stackTrace: stackTrace);
   }
 
-  void i(dynamic message, {String tag, String title, StackTrace stackTrace}) {
+  void i(dynamic message, {String? tag, String? title, StackTrace? stackTrace}) {
     _log(Level.INFO, message, tag: tag, title: title, stackTrace: stackTrace);
   }
 
-  void w(dynamic message, {String tag, String title, StackTrace stackTrace}) {
+  void w(dynamic message, {String? tag, String? title, StackTrace? stackTrace}) {
     _log(Level.WARNING, message,
         tag: tag, title: title, stackTrace: stackTrace);
   }
 
-  void e(dynamic message, {String tag, String title, StackTrace stackTrace}) {
+  void e(dynamic message, {String? tag, String? title, StackTrace? stackTrace}) {
     _log(Level.ERROR, message, tag: tag, title: title, stackTrace: stackTrace);
   }
 
   void _log(
     Level level,
     dynamic message, {
-    String tag,
-    String title,
-    StackTrace stackTrace,
+    String? tag,
+    String? title,
+    StackTrace? stackTrace,
   }) {
     if (level < Dog.level) {
       return;
     }
     Record record =
         Record(level, message, DateTime.now(), tag, title, stackTrace);
-    List<String> lines = formatter.format(record);
+    List<String?> lines = formatter.format(record);
     emitter.emit(record, lines);
   }
 

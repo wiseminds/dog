@@ -9,12 +9,12 @@ class FileEmitter extends Emitter {
   final File file;
 
   /// [FileMode.writeOnlyAppend] or [FileMode.writeOnly].
-  final bool append;
+  final bool? append;
 
-  IOSink _ioSink;
+  late IOSink _ioSink;
 
   FileEmitter({
-    this.file,
+    required this.file,
     this.append,
   }) : assert(file != null) {
     _ioSink = file.openWrite(
@@ -22,13 +22,13 @@ class FileEmitter extends Emitter {
   }
 
   @override
-  void emit(Record record, List<String> lines) {
-    lines.forEach(_ioSink?.writeln);
+  void emit(Record record, List<String?> lines) {
+    lines.forEach(_ioSink.writeln);
   }
 
   @override
   void destroy() async {
-    await _ioSink?.flush();
-    await _ioSink?.close();
+    await _ioSink.flush();
+    await _ioSink.close();
   }
 }
