@@ -43,7 +43,7 @@ class PrettyFormatter extends Formatter {
   /// ┌───────────
   String? get topBorder {
     if (_topBorder == null) {
-      List<String?> l = [lineLength.toString()];
+      List<String?> l = List.filled(lineLength, null, growable: false);
       l[0] = topLeftCorner;
       l.fillRange(1, lineLength, solidDivider);
       _topBorder = l.join();
@@ -54,7 +54,7 @@ class PrettyFormatter extends Formatter {
   /// ├┄┄┄┄┄┄┄┄┄┄┄
   String? get middleBorder {
     if (_middleBorder == null) {
-      List<String?> l = [lineLength.toString()];
+      List<String?> l = List.filled(lineLength, null, growable: false);
       l[0] = middleCorner;
       l.fillRange(1, lineLength, dottedDivider);
       _middleBorder = l.join();
@@ -65,7 +65,7 @@ class PrettyFormatter extends Formatter {
   /// └───────────
   String? get bottomBorder {
     if (_bottomBorder == null) {
-      List<String?> l = [lineLength.toString()];
+      List<String?> l = List.filled(lineLength, null, growable: false);
       l[0] = bottomLeftCorner;
       l.fillRange(1, lineLength, solidDivider);
       _bottomBorder = l.join();
