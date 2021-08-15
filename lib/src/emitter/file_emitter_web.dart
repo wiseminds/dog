@@ -4,7 +4,7 @@ import '../record.dart';
 /// Unsupported
 class FileEmitter extends Emitter {
   final dynamic file;
-  final bool append;
+  final bool? append;
 
   FileEmitter({
     this.file,
@@ -14,5 +14,5 @@ class FileEmitter extends Emitter {
   }
 
   @override
-  void emit(Record record, List<String> lines) {}
+  void emit(Record record, List<String?> lines) {}
 }

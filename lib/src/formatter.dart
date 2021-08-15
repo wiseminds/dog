@@ -4,16 +4,16 @@ import 'record.dart';
 
 /// Format log message.
 abstract class Formatter {
-  List<String> format(Record record);
+  List<String?> format(Record record);
 }
 
 /// Support [Function] message.
-typedef String StringCallback();
+typedef String? StringCallback();
 
 /// Default caller info getter.
-String callerInfo() {
-  List<Frame> frames = Trace.current().frames;
-  if (frames != null && frames.isNotEmpty) {
+String? callerInfo() {
+  var frames = Trace.current().frames;
+  if (frames.isNotEmpty) {
     for (int i = frames.length - 1; i >= 0; i--) {
       if (frames[i].package == 'dog') {
         return frames[i + 1].toString();

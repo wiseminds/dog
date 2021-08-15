@@ -36,14 +36,14 @@ class PrettyFormatter extends Formatter {
 
   final JsonEncoder prettyJsonEncoder = JsonEncoder.withIndent('  ');
 
-  String _topBorder;
-  String _middleBorder;
-  String _bottomBorder;
+  String? _topBorder;
+  String? _middleBorder;
+  String? _bottomBorder;
 
   /// ┌───────────
-  String get topBorder {
+  String? get topBorder {
     if (_topBorder == null) {
-      List<String> l = List(lineLength);
+      List<String?> l = [lineLength.toString()];
       l[0] = topLeftCorner;
       l.fillRange(1, lineLength, solidDivider);
       _topBorder = l.join();
@@ -52,9 +52,9 @@ class PrettyFormatter extends Formatter {
   }
 
   /// ├┄┄┄┄┄┄┄┄┄┄┄
-  String get middleBorder {
+  String? get middleBorder {
     if (_middleBorder == null) {
-      List<String> l = List(lineLength);
+      List<String?> l = [lineLength.toString()];
       l[0] = middleCorner;
       l.fillRange(1, lineLength, dottedDivider);
       _middleBorder = l.join();
@@ -63,9 +63,9 @@ class PrettyFormatter extends Formatter {
   }
 
   /// └───────────
-  String get bottomBorder {
+  String? get bottomBorder {
     if (_bottomBorder == null) {
-      List<String> l = List(lineLength);
+      List<String?> l = [lineLength.toString()];
       l[0] = bottomLeftCorner;
       l.fillRange(1, lineLength, solidDivider);
       _bottomBorder = l.join();
@@ -74,13 +74,13 @@ class PrettyFormatter extends Formatter {
   }
 
   @override
-  List<String> format(Record record) {
-    List<String> lines = [];
+  List<String?> format(Record record) {
+    List<String?> lines = [];
 
     lines.add(topBorder);
 
     // tag/level time caller
-    String caller = callerGetter == null ? null : callerGetter();
+    String? caller = callerGetter == null ? null : callerGetter();
     lines.add('$verticalLine ${record.tag ?? record.level.name}'
         ' ${_fmtTime(record.dateTime)}'
         '${caller == null ? '' : (' (' + caller + ')')}');
@@ -122,7 +122,7 @@ class PrettyFormatter extends Formatter {
     }
 
     // stack trace
-    String st;
+    String? st;
     if (record.stackTrace != null) {
       st = convertStackTrace(record.stackTrace);
     }
@@ -165,7 +165,7 @@ class PrettyFormatter extends Formatter {
   }
 
   /// [stackTraceLevel] lines at most.
-  String convertStackTrace(StackTrace stackTrace) {
+  String convertStackTrace(StackTrace? stackTrace) {
     String st = stackTrace.toString();
     List<String> lines = st.split('\n');
     int length = lines.length;

@@ -7,13 +7,13 @@ class Record {
   final DateTime dateTime;
 
   /// Optional. Defaults to level name.
-  final String tag;
+  final String? tag;
 
   /// Optional. [title] shows above [message].
-  final String title;
+  final String? title;
 
   /// Optional.
-  final StackTrace stackTrace;
+  final StackTrace? stackTrace;
 
   Record(
     this.level,

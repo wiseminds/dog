@@ -10,7 +10,7 @@ class SimpleFormatter extends Formatter {
   final int stackTraceLevel;
 
   /// Function to get caller info.
-  final StringCallback callerGetter;
+  final StringCallback? callerGetter;
 
   SimpleFormatter({
     this.stackTraceLevel = 10,
@@ -18,10 +18,10 @@ class SimpleFormatter extends Formatter {
   });
 
   @override
-  List<String> format(Record record) {
-    List<String> lines = [];
+  List<String?> format(Record record) {
+    List<String?> lines = [];
     // tag/level time caller
-    String caller = callerGetter == null ? null : callerGetter();
+    String? caller = callerGetter == null ? null : callerGetter!();
     lines.add('${record.tag ?? record.level.name}'
         ' ${record.dateTime.toIso8601String()}'
         '${caller == null ? '' : (' (' + caller + ')')}');
@@ -64,7 +64,7 @@ class SimpleFormatter extends Formatter {
   }
 
   /// [stackTraceLevel] lines at most.
-  String convertStackTrace(StackTrace stackTrace) {
+  String convertStackTrace(StackTrace? stackTrace) {
     String st = stackTrace.toString();
     List<String> lines = st.split('\n');
     int length = lines.length;

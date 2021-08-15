@@ -7,10 +7,10 @@ import '../record.dart';
 
 /// Print to browser console.
 class ConsoleEmitter extends Emitter {
-  ConsoleEmitter({bool supportsAnsiColor});
+  ConsoleEmitter({bool? supportsAnsiColor});
 
   @override
-  void emit(Record record, List<String> lines) {
+  void emit(Record record, List<String?> lines) {
     String output = lines.join('\n');
     if (record.level == Level.VERBOSE) {
       jsConsole('debug', ['%c$output', 'color:grey']);
@@ -29,7 +29,7 @@ class ConsoleEmitter extends Emitter {
     }
   }
 
-  void jsConsole(String method, [List args]) {
+  void jsConsole(String method, [List? args]) {
     JsObject console = JsObject.fromBrowserObject(context['console']);
     if (console != null && console.hasProperty(method)) {
       console.callMethod(method, args);
